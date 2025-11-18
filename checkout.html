@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>Checkout – Nova Supply | Pro Ecommerce Demo</title>
+  <meta name="description" content="Checkout page demo for the NeuroWeb Pro ecommerce plan.">
+
+  <meta name="theme-color" content="#020617">
+  <meta name="color-scheme" content="light dark">
+
+  <link rel="stylesheet" href="../shared/css/tokens.css">
+  <link rel="stylesheet" href="../shared/css/ui.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --pro-bg:#020617;
+      --pro-surface:#FFFFFF;
+      --pro-border:#E5E7EB;
+      --pro-ink:#020617;
+      --pro-muted:#6B7280;
+      --pro-accent:#6366F1;
+      --pro-accent-soft:#EEF2FF;
+      --pro-radius-lg:26px;
+      --pro-radius-md:18px;
+    }
+    html{scroll-behavior:smooth;}
+    body{
+      margin:0;
+      font-family:'Inter',system-ui,sans-serif;
+      color:var(--pro-ink);
+      background:radial-gradient(circle at top,#E5E7EB 0,#F9FAFB 40%,#E5E7EB 100%);
+    }
+    .page{min-height:100vh;display:flex;flex-direction:column;}
+    main{flex:1;}
+    .wrap{max-width:1120px;margin:0 auto;padding:0 1.5rem;}
+
+    /* Header (same as cart) */
+    @keyframes navSlideDown{
+      from{transform:translateY(-100%);opacity:0;}
+      to{transform:translateY(0);opacity:1;}
+    }
+    .site-header{
+      position:sticky;top:0;z-index:40;
+      background:rgba(255,255,255,0.94);
+      backdrop-filter:blur(18px);
+      border-bottom:1px solid rgba(15,23,42,0.08);
+      animation:navSlideDown .5s ease-out both;
+    }
+    .site-header .wrap{
+      padding:.6rem 0 .55rem;
+      display:flex;align-items:center;justify-content:space-between;gap:1.25rem;
+    }
+    .brand{display:inline-flex;align-items:center;gap:.5rem;text-decoration:none;}
+    .logo-dot{
+      width:1.15rem;height:1.15rem;border-radius:999px;
+      background:conic-gradient(from 160deg,#6366F1,#EC4899,#22C55E,#6366F1);
+      box-shadow:0 0 0 5px rgba(99,102,241,0.2);
+    }
+    .brand-text{font-weight:700;letter-spacing:-0.04em;font-size:1.05rem;color:#0F172A;}
+    .brand-text span{font-weight:500;color:#6B7280;}
+
+    .site-nav{display:flex;align-items:center;gap:1.25rem;font-size:.9rem;}
+    .site-nav a{
+      position:relative;text-decoration:none;color:#4B5563;
+      padding:.15rem 0;opacity:.8;
+      transition:color .18s ease,opacity .18s ease,transform .18s ease;
+    }
+    .site-nav a::after{
+      content:"";position:absolute;left:0;bottom:-0.2rem;width:0;height:2px;border-radius:999px;
+      background:linear-gradient(90deg,#6366F1,#EC4899);opacity:0;
+      transition:width .2s ease,opacity .2s ease;
+    }
+    .site-nav a:hover{opacity:1;color:#111827;transform:translateY(-1px);}
+    .site-nav a:hover::after{width:100%;opacity:1;}
+    .site-nav-cta{
+      display:inline-flex;align-items:center;gap:.4rem;
+      padding:.5rem .95rem;border-radius:999px;
+      background:linear-gradient(135deg,#6366F1,#EC4899);
+      color:#FFFFFF;text-decoration:none;font-size:.85rem;font-weight:600;
+      box-shadow:0 14px 30px rgba(99,102,241,0.35);
+      transition:transform .18s ease,box-shadow .18s ease;
+    }
+    .site-nav-cta:hover{transform:translateY(-2px);box-shadow:0 20px 55px rgba(99,102,241,0.45);}
+
+    /* Checkout */
+    .checkout-hero{padding:2.6rem 0 3.1rem;}
+    .crumbs{font-size:.78rem;color:#9CA3AF;margin-bottom:1rem;}
+    .crumbs a{color:#6B7280;text-decoration:none;}
+
+    .checkout-layout{
+      display:grid;
+      grid-template-columns:minmax(0,1.6fr) minmax(0,1.05fr);
+      gap:2.1rem;
+      align-items:flex-start;
+    }
+
+    .checkout-card{
+      border-radius:var(--pro-radius-lg);
+      border:1px solid var(--pro-border);
+      background:#FFFFFF;
+      padding:1.2rem 1.3rem 1.3rem;
+      display:grid;gap:1.2rem;
+    }
+
+    .step-kicker{font-size:.8rem;color:#6B7280;margin-bottom:.2rem;}
+    .checkout-title{font-size:1.3rem;letter-spacing:-0.03em;margin:0 0 .35rem;}
+    .step-indicator{font-size:.78rem;color:#6B7280;margin-bottom:.4rem;}
+    .step-indicator strong{color:#111827;}
+
+    .progress{
+      display:flex;gap:.3rem;align-items:center;
+      font-size:.75rem;color:#6B7280;margin-bottom:.6rem;
+    }
+    .progress-bar{
+      flex:1;height:.28rem;border-radius:999px;
+      background:#E5E7EB;overflow:hidden;
+    }
+    .progress-fill{
+      height:100%;width:66%;
+      border-radius:999px;
+      background:linear-gradient(90deg,#6366F1,#EC4899);
+    }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:.85rem .9rem;
+      font-size:.85rem;
+    }
+    .form-field{display:flex;flex-direction:column;gap:.25rem;}
+    .form-field label{font-size:.8rem;color:#374151;}
+    .form-field input,
+    .form-field select{
+      border-radius:999px;
+      border:1px solid #E5E7EB;
+      padding:.55rem .85rem;
+      font-size:.85rem;
+      font-family:inherit;
+    }
+    .form-field input:focus,
+    .form-field select:focus{
+      outline:none;
+      border-color:#6366F1;
+      box-shadow:0 0 0 1px rgba(99,102,241,0.3);
+    }
+
+    .form-field--full{grid-column:1 / -1;}
+    .inline-note{font-size:.78rem;color:#6B7280;margin-top:.2rem;}
+
+    .radio-row{
+      display:flex;flex-wrap:wrap;gap:.55rem;
+      font-size:.82rem;
+    }
+    .radio-pill{
+      border-radius:999px;
+      border:1px solid #E5E7EB;
+      background:#F9FAFB;
+      padding:.45rem .85rem;
+      display:inline-flex;align-items:center;gap:.35rem;
+      cursor:pointer;
+      transition:border-color .16s ease,background .16s ease,transform .16s ease;
+    }
+    .radio-pill input{accent-color:#6366F1;}
+    .radio-pill--active{
+      border-color:#6366F1;
+      background:#EEF2FF;
+      transform:translateY(-1px);
+    }
+
+    .btn-primary{
+      display:inline-flex;align-items:center;justify-content:center;gap:.4rem;
+      padding:.9rem 1.7rem;border-radius:999px;border:none;
+      background:linear-gradient(135deg,#6366F1,#EC4899);
+      color:#FFFFFF;font-size:.9rem;font-weight:600;
+      text-decoration:none;cursor:pointer;
+      box-shadow:0 16px 38px rgba(129,140,248,0.45);
+      transition:transform .18s ease,box-shadow .18s ease,background-position .18s ease;
+      background-size:180% 180%;background-position:0% 50%;
+      flex:1 1 190px;
+    }
+    .btn-primary:hover{
+      transform:translateY(-2px);
+      box-shadow:0 22px 60px rgba(129,140,248,0.55);
+      background-position:100% 50%;
+    }
+
+    .btn-ghost-link{
+      font-size:.8rem;color:#6B7280;text-decoration:underline;
+      background:none;border:none;padding:0;margin-left:.7rem;cursor:pointer;
+    }
+
+    .checkout-actions{
+      margin-top:.8rem;
+      display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;
+      font-size:.78rem;color:#6B7280;
+    }
+
+    /* Order summary */
+    .summary-card{
+      border-radius:var(--pro-radius-lg);
+      border:1px solid var(--pro-border);
+      background:#FFFFFF;
+      padding:1.1rem 1.2rem 1.2rem;
+      font-size:.86rem;
+      display:grid;gap:.75rem;
+    }
+    .summary-title{font-size:1rem;font-weight:600;margin:0;}
+    .summary-items{display:grid;gap:.55rem;}
+    .summary-item{
+      display:flex;justify-content:space-between;gap:.6rem;
+      font-size:.82rem;
+    }
+    .summary-item-main{color:#374151;}
+    .summary-item-main span{display:block;font-size:.75rem;color:#9CA3AF;}
+    .summary-item-price{font-weight:500;color:#111827;}
+
+    .summary-row{
+      display:flex;justify-content:space-between;gap:.5rem;
+      margin-top:.1rem;
+    }
+    .summary-row--total{
+      padding-top:.4rem;border-top:1px solid #E5E7EB;font-size:.93rem;
+    }
+    .summary-note{font-size:.78rem;color:#6B7280;}
+
+    .summary-pill{
+      font-size:.78rem;
+      padding:.2rem .6rem;
+      border-radius:999px;
+      background:#ECFEFF;
+      color:#0369A1;
+      border:1px solid #BAE6FD;
+      display:inline-flex;align-items:center;gap:.35rem;
+    }
+
+    /* Reveal */
+    .reveal{opacity:0;transform:translateY(32px);transition:all .8s ease-out;}
+    .reveal.reveal-visible{opacity:1;transform:translateY(0);}
+    [data-delay="1"]{transition-delay:.12s;}
+
+    /* Footer */
+    footer{
+      padding:1.6rem 0 2.1rem;border-top:1px solid #E5E7EB;
+      background:#F9FAFB;font-size:.8rem;color:#6B7280;
+    }
+    .footer-inner{
+      display:flex;justify-content:space-between;gap:1rem;align-items:center;flex-wrap:wrap;
+    }
+    footer a{color:#4B5563;text-decoration:none;}
+
+    /* Responsive */
+    @media (max-width:880px){
+      .checkout-layout{grid-template-columns:1fr;}
+      .site-header .wrap{flex-direction:column;align-items:flex-start;}
+      .site-nav{flex-wrap:wrap;row-gap:.25rem;}
+    }
+    @media (max-width:640px){
+      .wrap{padding:0 1.25rem;}
+      .form-grid{grid-template-columns:1fr;}
+      .site-nav{overflow-x:auto;white-space:nowrap;}
+      .site-nav a,.site-nav-cta{flex:0 0 auto;}
+      .checkout-actions{flex-direction:column;align-items:flex-start;}
+      .btn-primary{width:100%;}
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <header class="site-header">
+    <div class="wrap">
+      <a href="index.html" class="brand">
+        <span class="logo-dot"></span>
+        <span class="brand-text">NeuroWeb<span> Pro Ecommerce</span></span>
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="index.html#catalog">Catalog</a>
+        <a href="index.html#features">Features</a>
+        <a href="index.html#pricing">Pro Plan</a>
+        <a href="index.html#contact" class="site-nav-cta">Talk to us</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="checkout-hero">
+      <div class="wrap">
+        <div class="crumbs">
+          <a href="index.html#catalog">Home</a> · <a href="cart.html">Cart</a> · Checkout
+        </div>
+
+        <div class="checkout-layout">
+          <div class="checkout-card reveal">
+            <div>
+              <div class="step-kicker">Step 2 of 3</div>
+              <h1 class="checkout-title">Checkout</h1>
+              <div class="step-indicator">
+                Cart · <strong>Checkout</strong> · Thank you
+              </div>
+              <div class="progress">
+                <span>Details & payment</span>
+                <div class="progress-bar"><div class="progress-fill"></div></div>
+              </div>
+            </div>
+
+            <form novalidate>
+              <div class="form-grid">
+                <div class="form-field form-field--full">
+                  <label for="email">Email for order updates</label>
+                  <input id="email" type="email" placeholder="you@example.com">
+                  <div class="inline-note">We’ll send your confirmation and tracking here.</div>
+                </div>
+
+                <div class="form-field">
+                  <label for="first-name">First name</label>
+                  <input id="first-name" type="text" placeholder="First name">
+                </div>
+                <div class="form-field">
+                  <label for="last-name">Last name</label>
+                  <input id="last-name" type="text" placeholder="Last name">
+                </div>
+
+                <div class="form-field form-field--full">
+                  <label for="address">Street address</label>
+                  <input id="address" type="text" placeholder="Unit, building, street">
+                </div>
+
+                <div class="form-field">
+                  <label for="city">City</label>
+                  <input id="city" type="text" placeholder="City / suburb">
+                </div>
+                <div class="form-field">
+                  <label for="postal">Postal code</label>
+                  <input id="postal" type="text" placeholder="Postal code">
+                </div>
+
+                <div class="form-field">
+                  <label for="province">Province</label>
+                  <select id="province">
+                    <option selected>Western Cape</option>
+                    <option>Gauteng</option>
+                    <option>KwaZulu-Natal</option>
+                    <option>Eastern Cape</option>
+                    <option>Free State</option>
+                    <option>Limpopo</option>
+                    <option>Mpumalanga</option>
+                    <option>North West</option>
+                    <option>Northern Cape</option>
+                  </select>
+                </div>
+
+                <div class="form-field">
+                  <label for="phone">Phone (for courier)</label>
+                  <input id="phone" type="tel" placeholder="+27...">
+                </div>
+
+                <div class="form-field form-field--full">
+                  <label>Shipping method</label>
+                  <div class="radio-row">
+                    <label class="radio-pill radio-pill--active">
+                      <input type="radio" name="shipping" checked>
+                      <span>Standard (1–3 business days) – Free</span>
+                    </label>
+                    <label class="radio-pill">
+                      <input type="radio" name="shipping">
+                      <span>Express (1–2 business days) – R120</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="form-field form-field--full">
+                  <label>Payment method</label>
+                  <div class="radio-row">
+                    <label class="radio-pill radio-pill--active">
+                      <input type="radio" name="payment" checked>
+                      <span>Card / instant EFT (via gateway)</span>
+                    </label>
+                    <label class="radio-pill">
+                      <input type="radio" name="payment">
+                      <span>Pay on collection (where available)</span>
+                    </label>
+                  </div>
+                  <div class="inline-note">
+                    For the demo this is a static form. On a real store this section would be fully handled by your payment gateway.
+                  </div>
+                </div>
+              </div>
+
+              <div class="checkout-actions">
+                <a href="thank-you.html" class="btn-primary">Place order</a>
+                <button class="btn-ghost-link" type="button" onclick="window.location.href='cart.html'">
+                  ← Back to cart
+                </button>
+                <span>By placing your order you agree to our store terms.</span>
+              </div>
+            </form>
+          </div>
+
+          <aside class="summary-card reveal" data-delay="1">
+            <h2 class="summary-title">Order summary</h2>
+
+            <div class="summary-items">
+              <div class="summary-item">
+                <div class="summary-item-main">
+                  Everyday Tech Tote
+                  <span>Storm · Standard strap · Qty 1</span>
+                </div>
+                <div class="summary-item-price">R1,299</div>
+              </div>
+              <div class="summary-item">
+                <div class="summary-item-main">
+                  Cable & Charger Pouch
+                  <span>Slate · Qty 1</span>
+                </div>
+                <div class="summary-item-price">R279</div>
+              </div>
+            </div>
+
+            <div class="summary-row">
+              <span>Subtotal</span>
+              <span>R1,578</span>
+            </div>
+            <div class="summary-row">
+              <span>Shipping</span>
+              <span>Free – standard</span>
+            </div>
+
+            <div class="summary-row summary-row--total">
+              <span>Total</span>
+              <span>R1,578</span>
+            </div>
+
+            <div class="summary-pill">
+              <span aria-hidden="true">✓</span>
+              Secure checkout · no card details stored by us.
+            </div>
+
+            <p class="summary-note">
+              In a real build this sidebar would be powered by your platform’s checkout or a headless cart API,
+              but the layout would stay consistent with the rest of the Pro design.
+            </p>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <div>© <span id="year"></span> NeuroWeb Digital. Checkout page demo.</div>
+      <div style="display:flex;gap:.7rem;flex-wrap:wrap;">
+        <a href="cart.html">Cart</a>
+        <span aria-hidden="true">·</span>
+        <a href="index.html">Pro homepage</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('reveal-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.14});
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+</script>
+</body>
+</html>
