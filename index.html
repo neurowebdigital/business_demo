@@ -3,1487 +3,424 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <title>Nova Supply — Pro Ecommerce Demo | NeuroWeb</title>
-  <meta name="description" content="Pro Plan ecommerce demo for NeuroWeb. A modern online store homepage with product grid, filters, and conversion-focused layout.">
+  <title>Atlas Performance Club — Business Fitness Demo | NeuroWeb</title>
 
-  <meta name="theme-color" content="#020617">
-  <meta name="color-scheme" content="light dark">
-
-  <!-- Base kit -->
-  <link rel="stylesheet" href="../shared/css/tokens.css">
-  <link rel="stylesheet" href="../shared/css/ui.css">
+  <meta name="description" content="Business Plan demo for NeuroWeb. A modern fitness studio & coaching site with clear programs, results, blog, and lead-gen layout.">
+  <meta name="theme-color" content="#F9FAFB">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <style>
-    :root{
-      --pro-bg:#020617;
-      --pro-surface:#FFFFFF;
-      --pro-surface-soft:#F5F5FA;
-      --pro-ink:#020617;
-      --pro-muted:#6B7280;
-      --pro-border:#E5E7EB;
-
-      --pro-accent:#6366F1;          /* indigo */
-      --pro-accent-soft:#EEF2FF;
-      --pro-accent-strong:#4F46E5;
-
-      --pro-radius-lg:26px;
-      --pro-radius-md:18px;
-    }
-
-    html{ scroll-behavior:smooth; }
-    body{
-      margin:0;
-      font-family:'Inter',system-ui,sans-serif;
-      color:var(--pro-ink);
-      background:radial-gradient(circle at top,#E5E7EB 0,#F9FAFB 40%,#E5E7EB 100%);
-    }
-
-    .pro-page{
-      min-height:100vh;
-      display:flex;
-      flex-direction:column;
-    }
-
-    .pro-main{ flex:1; }
-
-    /* ============================
-       HEADER / NAV – PRO OVERRIDES
-       ============================ */
-
-    @keyframes navSlideDown{
-      from{transform:translateY(-100%);opacity:0;}
-      to{transform:translateY(0);opacity:1;}
-    }
-
-    .site-header{
-      position:sticky;
-      top:0;
-      z-index:40;
-      background:rgba(255,255,255,0.94);
-      backdrop-filter:blur(18px);
-      border-bottom:1px solid rgba(15,23,42,0.08);
-      animation:navSlideDown .5s ease-out both;
-    }
-
-    .site-header .wrap{
-      padding:.6rem 0 .55rem !important;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:1.25rem;
-    }
-
-    .brand{
-      display:inline-flex;
-      align-items:center;
-      gap:.5rem;
-      text-decoration:none;
-    }
-
-    .logo-dot{
-      width:1.15rem;
-      height:1.15rem;
-      border-radius:999px;
-      background:conic-gradient(from 160deg,#6366F1,#EC4899,#22C55E,#6366F1);
-      box-shadow:0 0 0 5px rgba(99,102,241,0.2);
-    }
-
-    .brand-text{
-      font-weight:700;
-      letter-spacing:-0.04em;
-      font-size:1.05rem;
-      color:#0F172A;
-    }
-
-    .brand-text span{
-      font-weight:500;
-      color:#6B7280;
-    }
-
-    .site-nav{
-      display:flex;
-      align-items:center;
-      gap:1.25rem;
-      font-size:.9rem;
-    }
-
-    .site-nav a{
-      position:relative;
-      text-decoration:none;
-      color:#4B5563;
-      padding:.15rem 0;
-      opacity:.8;
-      transition:color .18s ease,opacity .18s ease,transform .18s ease;
-    }
-
-    .site-nav a::after{
-      content:"";
-      position:absolute;
-      left:0;
-      bottom:-0.2rem;
-      width:0;
-      height:2px;
-      border-radius:999px;
-      background:linear-gradient(90deg,#6366F1,#EC4899);
-      opacity:0;
-      transition:width .2s ease,opacity .2s ease;
-    }
-
-    .site-nav a:hover{
-      opacity:1;
-      color:#111827;
-      transform:translateY(-1px);
-    }
-
-    .site-nav a:hover::after{
-      width:100%;
-      opacity:1;
-    }
-
-    .site-nav a.is-active{
-      opacity:1;
-      color:#111827;
-      font-weight:500;
-    }
-    .site-nav a.is-active::after{
-      width:100%;
-      opacity:1;
-    }
-
-    .site-nav-cta{
-      display:inline-flex;
-      align-items:center;
-      gap:.4rem;
-      padding:.5rem .95rem;
-      border-radius:999px;
-      background:linear-gradient(135deg,#6366F1,#EC4899);
-      color:#FFFFFF;
-      text-decoration:none;
-      font-size:.85rem;
-      font-weight:600;
-      box-shadow:0 14px 30px rgba(99,102,241,0.35);
-      transition:transform .18s ease,box-shadow .18s ease;
-    }
-    .site-nav-cta:hover{
-      transform:translateY(-2px);
-      box-shadow:0 20px 55px rgba(99,102,241,0.45);
-    }
-
-    /* ============================
-       HERO
-       ============================ */
-
-    .pro-hero{
-      position:relative;
-      padding:3.3rem 0 3rem;
-      overflow:hidden;
-    }
-
-    .pro-hero-bg{
-      position:absolute;
-      inset:0;
-      background:
-        radial-gradient(circle at top left,rgba(129,140,248,0.25) 0,transparent 55%),
-        radial-gradient(circle at top right,rgba(236,72,153,0.18) 0,transparent 55%),
-        linear-gradient(180deg,#FFFFFF 0,#EEF2FF 40%,#F9FAFB 100%);
-      z-index:-1;
-    }
-
-    .pro-hero-grid{
-      display:grid;
-      grid-template-columns:minmax(0,3fr) minmax(0,3fr);
-      gap:2.5rem;
-      align-items:center;
-    }
-
-    .pro-pill{
-      display:inline-flex;
-      align-items:center;
-      gap:.45rem;
-      padding:.2rem .7rem;
-      border-radius:999px;
-      border:1px solid rgba(148,163,184,0.65);
-      font-size:.75rem;
-      text-transform:uppercase;
-      letter-spacing:.1em;
-      color:#4B5563;
-      background:rgba(255,255,255,0.8);
-      backdrop-filter:blur(14px);
-    }
-
-    .pro-pill span{
-      width:.45rem;
-      height:.45rem;
-      border-radius:999px;
-      background:linear-gradient(135deg,#6366F1,#EC4899);
-      box-shadow:0 0 0 6px rgba(129,140,248,0.4);
-    }
-
-    .pro-hero-title{
-      margin-top:1rem;
-      font-size:clamp(2.4rem,3.4vw,3.4rem);
-      letter-spacing:-0.05em;
-      line-height:1.03;
-      color:#020617;
-    }
-
-    .pro-hero-title span{
-      background:linear-gradient(120deg,#6366F1,#EC4899);
-      -webkit-background-clip:text;
-      color:transparent;
-    }
-
-    .pro-hero-lead{
-      margin-top:.9rem;
-      max-width:32rem;
-      color:#4B5563;
-      font-size:.98rem;
-    }
-
-    .pro-hero-meta{
-      margin-top:1.4rem;
-      display:flex;
-      flex-wrap:wrap;
-      gap:1.5rem 2.8rem;
-      font-size:.82rem;
-      color:#6B7280;
-    }
-    .pro-hero-meta strong{
-      display:block;
-      font-size:.9rem;
-      color:#111827;
-    }
-
-    .pro-hero-actions{
-      margin-top:1.8rem;
-      display:flex;
-      flex-wrap:wrap;
-      gap:.85rem;
-    }
-
-    .pro-btn-primary{
-      display:inline-flex;
-      align-items:center;
-      gap:.45rem;
-      padding:.9rem 1.8rem;
-      border-radius:999px;
-      background:linear-gradient(135deg,#6366F1,#EC4899);
-      color:#FFFFFF;
-      border:none;
-      font-size:.95rem;
-      font-weight:600;
-      text-decoration:none;
-      box-shadow:0 18px 40px rgba(129,140,248,0.4);
-      cursor:pointer;
-      transition:transform .18s ease,box-shadow .18s ease,background-position .2s ease;
-      background-size:180% 180%;
-      background-position:0% 50%;
-    }
-    .pro-btn-primary:hover{
-      transform:translateY(-2px);
-      box-shadow:0 24px 60px rgba(129,140,248,0.5);
-      background-position:100% 50%;
-    }
-
-    .pro-btn-ghost{
-      display:inline-flex;
-      align-items:center;
-      gap:.45rem;
-      padding:.9rem 1.6rem;
-      border-radius:999px;
-      background:#FFFFFF;
-      border:1px solid rgba(148,163,184,0.8);
-      color:#111827;
-      text-decoration:none;
-      font-size:.92rem;
-      font-weight:500;
-      cursor:pointer;
-      transition:background .18s ease,border-color .18s ease,transform .18s ease;
-    }
-    .pro-btn-ghost:hover{
-      background:#F9FAFB;
-      border-color:#6366F1;
-      transform:translateY(-2px);
-    }
-
-    .pro-hero-note{
-      margin-top:1rem;
-      font-size:.8rem;
-      color:#6B7280;
-      max-width:32rem;
-    }
-
-    /* Hero store preview */
-
-    .pro-store-shell{
-      border-radius:32px;
-      background:#020617;
-      border:1px solid rgba(15,23,42,0.7);
-      box-shadow:0 24px 70px rgba(15,23,42,0.85);
-      padding:1.1rem;
-      color:#E5E7EB;
-    }
-
-    .pro-store-header{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      margin-bottom:.8rem;
-      font-size:.8rem;
-    }
-
-    .pro-store-logo{
-      display:flex;
-      align-items:center;
-      gap:.4rem;
-    }
-
-    .pro-store-logo span{
-      width:.8rem;
-      height:.8rem;
-      border-radius:999px;
-      background:#6366F1;
-    }
-
-    .pro-store-logo strong{
-      font-size:.85rem;
-    }
-
-    .pro-store-badges{
-      display:flex;
-      gap:.4rem;
-      flex-wrap:wrap;
-    }
-
-    .pro-chip{
-      font-size:.7rem;
-      padding:.2rem .55rem;
-      border-radius:999px;
-      border:1px solid rgba(148,163,184,0.8);
-      background:rgba(15,23,42,0.9);
-      color:#E5E7EB;
-    }
-
-    .pro-store-main{
-      border-radius:24px;
-      background:linear-gradient(135deg,#020617,#020617 50%,#111827 100%);
-      border:1px solid rgba(55,65,81,0.9);
-      padding:.9rem;
-      display:grid;
-      gap:.9rem;
-    }
-
-    .pro-store-filters{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      font-size:.78rem;
-      color:#CBD5F5;
-      gap:.75rem;
-      flex-wrap:wrap;
-    }
-
-    .pro-store-filters-left{
-      display:flex;
-      align-items:center;
-      gap:.4rem;
-      flex-wrap:wrap;
-    }
-
-    .pro-filter-pill{
-      padding:.22rem .65rem;
-      border-radius:999px;
-      border:1px solid rgba(148,163,184,0.8);
-      font-size:.7rem;
-      color:#E5E7EB;
-    }
-
-    .pro-filter-pill--active{
-      border-color:#6366F1;
-      background:rgba(79,70,229,0.2);
-    }
-
-    .pro-store-grid{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:.7rem;
-    }
-
-    .pro-product-card{
-      border-radius:18px;
-      background:#020617;
-      border:1px solid rgba(55,65,81,0.9);
-      padding:.55rem .6rem .65rem;
-      display:grid;
-      gap:.35rem;
-      font-size:.75rem;
-      transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease,background .18s ease;
-    }
-    .pro-product-img{
-      height:84px;
-      border-radius:14px;
-      background:radial-gradient(circle at 20% 0,rgba(236,72,153,0.5),transparent 55%),
-                 radial-gradient(circle at 80% 100%,rgba(56,189,248,0.4),transparent 55%);
-      display:flex;
-      align-items:flex-end;
-      justify-content:flex-start;
-      padding:.55rem;
-      color:#F9FAFB;
-      font-size:.7rem;
-    }
-    .pro-product-img span{
-      background:rgba(15,23,42,0.7);
-      padding:.25rem .5rem;
-      border-radius:999px;
-    }
-    .pro-product-title{
-      font-size:.8rem;
-      color:#F9FAFB;
-    }
-    .pro-product-meta{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      font-size:.72rem;
-      color:#9CA3AF;
-    }
-    .pro-product-meta strong{
-      color:#E5E7EB;
-      font-size:.78rem;
-    }
-    .pro-product-card:hover{
-      transform:translateY(-3px);
-      border-color:#6366F1;
-      box-shadow:0 18px 40px rgba(15,23,42,0.9);
-      background:#02081C;
-    }
-
-    .pro-store-footer{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      font-size:.74rem;
-      color:#9CA3AF;
-    }
-    .pro-store-footer strong{
-      color:#E5E7EB;
-    }
-
-    /* ============================
-       GENERIC SECTION / UTILITIES
-       ============================ */
-
-    .section{
-      position:relative;
-      scroll-margin-top:90px;
-    }
-
-    .section--light{
-      background:#FFFFFF;
-    }
-
-    .section--muted{
-      background:#F5F5FA;
-    }
-
-    .section--dark{
-      background:#020617;
-      color:#E5E7EB;
-    }
-
-    .pro-section-head{
-      margin-bottom:1.8rem;
-    }
-
-    .pro-kicker{
-      font-size:.75rem;
-      text-transform:uppercase;
-      letter-spacing:.1em;
-      color:#6B7280;
-      margin-bottom:.4rem;
-    }
-
-    .pro-section-title{
-      font-size:1.45rem;
-      letter-spacing:-0.03em;
-      display:inline-flex;
-      align-items:flex-end;
-      gap:.5rem;
-      color:#020617;
-    }
-
-    .section--dark .pro-section-title{
-      color:#F9FAFB;
-    }
-
-    .pro-section-title span{
-      font-size:.75rem;
-      font-weight:500;
-      color:#6B7280;
-    }
-
-    .pro-section-lead{
-      margin-top:.5rem;
-      max-width:34rem;
-      font-size:.9rem;
-      color:#6B7280;
-    }
-    .section--dark .pro-section-lead{
-      color:#9CA3AF;
-    }
-
-    .pro-grid-3{
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:1.2rem;
-    }
-
-    .pro-grid-4{
-      display:grid;
-      grid-template-columns:repeat(4,minmax(0,1fr));
-      gap:1.1rem;
-    }
-
-    .pro-card{
-      border-radius:var(--pro-radius-md);
-      border:1px solid var(--pro-border);
-      background:#FFFFFF;
-      padding:1.1rem 1.1rem 1.2rem;
-      font-size:.88rem;
-      display:grid;
-      gap:.45rem;
-      transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease,background .18s ease;
-    }
-    .pro-card:hover{
-      transform:translateY(-3px);
-      border-color:#6366F1;
-      box-shadow:0 18px 46px rgba(15,23,42,0.12);
-    }
-
-    .pro-card h3{
-      font-size:.98rem;
-      margin:0;
-    }
-    .pro-card p{
-      margin:0;
-      color:#6B7280;
-      font-size:.84rem;
-    }
-
-    .section--dark .pro-card{
-      background:#020617;
-      border-color:rgba(55,65,81,0.9);
-    }
-    .section--dark .pro-card p{
-      color:#9CA3AF;
-    }
-
-    .pro-pill-soft{
-      display:inline-flex;
-      align-items:center;
-      gap:.3rem;
-      padding:.2rem .6rem;
-      border-radius:999px;
-      background:var(--pro-accent-soft);
-      color:#4F46E5;
-      font-size:.74rem;
-      font-weight:500;
-    }
-
-    /* Features (platform stack) */
-
-    .pro-stack-list{
-      display:grid;
-      gap:.7rem;
-      font-size:.9rem;
-    }
-    .pro-stack-item{
-      display:flex;
-      align-items:flex-start;
-      gap:.55rem;
-    }
-    .pro-stack-icon{
-      width:1.4rem;
-      height:1.4rem;
-      border-radius:999px;
-      background:linear-gradient(135deg,#6366F1,#EC4899);
-      opacity:.12;
-      margin-top:.15rem;
-    }
-    .pro-stack-item strong{
-      font-size:.92rem;
-    }
-    .pro-stack-item p{
-      margin:0;
-      font-size:.84rem;
-      color:#6B7280;
-    }
-
-    /* Product row */
-
-    .pro-products-row{
-      display:grid;
-      grid-template-columns:minmax(0,2.2fr) minmax(0,2fr);
-      gap:2rem;
-      align-items:flex-start;
-    }
-
-    .pro-products-grid{
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:.9rem;
-    }
-
-    .pro-prod{
-      border-radius:18px;
-      border:1px solid #E5E7EB;
-      background:#FFFFFF;
-      padding:.7rem .7rem .8rem;
-      display:grid;
-      gap:.35rem;
-      font-size:.83rem;
-      transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease;
-    }
-    .pro-prod-img{
-      border-radius:14px;
-      height:120px;
-      background:linear-gradient(135deg,#E5E7EB,#F3F4F6);
-    }
-    .pro-prod-tag-row{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:.5rem;
-    }
-    .pro-prod-pill{
-      font-size:.7rem;
-      padding:.18rem .5rem;
-      border-radius:999px;
-      background:#EEF2FF;
-      color:#4F46E5;
-    }
-    .pro-prod-price{
-      font-weight:600;
-      color:#111827;
-      font-size:.86rem;
-    }
-    .pro-prod-rating{
-      font-size:.75rem;
-      color:#6B7280;
-    }
-    .pro-prod:hover{
-      transform:translateY(-2px);
-      box-shadow:0 16px 40px rgba(15,23,42,0.12);
-      border-color:#6366F1;
-    }
-
-    .pro-products-copy ul{
-      margin:.7rem 0 0;
-      padding-left:1.1rem;
-      font-size:.86rem;
-      color:#6B7280;
-      display:grid;
-      gap:.25rem;
-    }
-    .pro-products-copy li::marker{
-      color:#6366F1;
-    }
-
-    /* Logos strip */
-
-    .pro-logos{
-      margin-top:1.8rem;
-      display:flex;
-      flex-wrap:wrap;
-      gap:1.5rem;
-      align-items:center;
-      font-size:.78rem;
-      color:#9CA3AF;
-    }
-
-    .pro-logos span{
-      padding:.25rem .6rem;
-      border-radius:999px;
-      border:1px dashed rgba(148,163,184,0.7);
-      background:#FFFFFF;
-      font-size:.78rem;
-      color:#4B5563;
-    }
-
-    /* Reviews */
-
-    .pro-reviews-grid{
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:1rem;
-    }
-    .pro-review{
-      border-radius:var(--pro-radius-md);
-      border:1px solid rgba(55,65,81,0.9);
-      background:#020617;
-      padding:1rem 1rem 1.1rem;
-      font-size:.86rem;
-      color:#E5E7EB;
-      box-shadow:0 18px 60px rgba(15,23,42,0.9);
-      display:grid;
-      gap:.6rem;
-    }
-    .pro-review-stars{
-      font-size:.8rem;
-      color:#FACC15;
-    }
-    .pro-review footer{
-      font-size:.78rem;
-      color:#9CA3AF;
-    }
-    .pro-review footer strong{
-      color:#E5E7EB;
-    }
-
-    /* Pro plan pricing strip */
-
-    .pro-pricing{
-      padding:3rem 0 3.2rem;
-      background:#020617;
-      color:#E5E7EB;
-    }
-
-    .pro-pricing-inner{
-      border-radius:var(--pro-radius-lg);
-      padding:1.7rem 1.5rem 1.8rem;
-      background:radial-gradient(circle at top left,rgba(79,70,229,0.45) 0,transparent 55%),
-                 radial-gradient(circle at bottom right,rgba(236,72,153,0.38) 0,transparent 55%),
-                 #020617;
-      border:1px solid rgba(55,65,81,0.95);
-      display:grid;
-      gap:1.1rem;
-      position:relative;
-      overflow:hidden;
-    }
-
-    .pro-pricing-inner::after{
-      content:"Pro Plan";
-      position:absolute;
-      top:-0.75rem;
-      right:1.5rem;
-      font-size:.72rem;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      padding:.18rem .7rem;
-      border-radius:999px;
-      background:rgba(15,23,42,0.8);
-      border:1px solid rgba(129,140,248,0.9);
-      color:#E5E7EB;
-      backdrop-filter:blur(14px);
-    }
-
-    .pro-price-main{
-      font-size:1.5rem;
-      font-weight:700;
-    }
-    .pro-price-main small{
-      font-size:.8rem;
-      font-weight:400;
-      color:#CBD5F5;
-    }
-
-    .pro-pricing-top{
-      display:flex;
-      justify-content:space-between;
-      flex-wrap:wrap;
-      gap:1.1rem;
-      align-items:flex-start;
-    }
-
-    .pro-pricing ul{
-      margin:0;
-      padding-left:1.1rem;
-      font-size:.86rem;
-      color:#CBD5F5;
-      display:grid;
-      gap:.25rem;
-    }
-    .pro-pricing li::marker{
-      color:#A5B4FC;
-    }
-
-    .pro-pricing-cta{
-      display:flex;
-      flex-wrap:wrap;
-      gap:.75rem;
-      align-items:center;
-      font-size:.8rem;
-      color:#CBD5F5;
-    }
-
-    /* FAQ */
-
-    .pro-faq-grid{
-      display:grid;
-      grid-template-columns:minmax(0,1.8fr) minmax(0,2fr);
-      gap:2.2rem;
-    }
-
-    .pro-faq-list{
-      display:grid;
-      gap:.85rem;
-      font-size:.86rem;
-    }
-
-    .pro-faq-item{
-      border-radius:var(--pro-radius-md);
-      border:1px solid #E5E7EB;
-      background:#FFFFFF;
-      padding:.9rem .95rem;
-      display:grid;
-      gap:.3rem;
-    }
-    .pro-faq-item h3{
-      margin:0;
-      font-size:.95rem;
-      color:#111827;
-    }
-    .pro-faq-item p{
-      margin:0;
-      color:#6B7280;
-    }
-
-    /* Contact teaser */
-
-    .pro-contact{
-      padding:2.8rem 0 3.2rem;
-      background:#FFFFFF;
-    }
-
-    .pro-contact-inner{
-      border-radius:var(--pro-radius-lg);
-      border:1px solid #E5E7EB;
-      background:linear-gradient(135deg,#FFFFFF,#EEF2FF);
-      padding:1.5rem 1.5rem 1.6rem;
-      display:flex;
-      flex-wrap:wrap;
-      gap:1.1rem 2.2rem;
-      align-items:center;
-      justify-content:space-between;
-    }
-
-    .pro-contact-inner p{
-      margin:.4rem 0 0;
-      max-width:30rem;
-      font-size:.9rem;
-      color:#4B5563;
-    }
-
-    /* Footer */
-
-    .pro-footer{
-      padding:1.5rem 0 2rem;
-      border-top:1px solid #E5E7EB;
-      font-size:.8rem;
-      color:#6B7280;
-      background:#F9FAFB;
-    }
-
-    .pro-footer-inner{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      flex-wrap:wrap;
-      gap:1rem;
-    }
-
-    .pro-footer a{
-      color:#4B5563;
-      text-decoration:none;
-    }
-
-    /* ============================
-       SIMPLE SCROLL-REVEAL ANIM
-       ============================ */
-
-    .reveal{
-      opacity:0;
-      transform:translateY(36px);
-      transition:all .8s ease-out;
-    }
-    .reveal.reveal-visible{
-      opacity:1;
-      transform:translateY(0);
-    }
-    [data-delay="1"]{transition-delay:.12s;}
-    [data-delay="2"]{transition-delay:.24s;}
-    [data-delay="3"]{transition-delay:.36s;}
-    [data-delay="4"]{transition-delay:.48s;}
-
-    /* ============================
-       RESPONSIVE
-       ============================ */
-
-    @media (max-width:1024px){
-      .pro-hero{
-        padding:2.7rem 0 2.6rem;
-      }
-      .pro-hero-grid{
-        grid-template-columns:1.1fr 1fr;
-      }
-      .pro-products-row{
-        grid-template-columns:1.3fr 1fr;
-      }
-      .pro-grid-4{
-        grid-template-columns:repeat(3,minmax(0,1fr));
-      }
-      .pro-reviews-grid{
-        grid-template-columns:repeat(2,minmax(0,1fr));
-      }
-    }
-
-    @media (max-width:880px){
-      .pro-hero-grid,
-      .pro-products-row,
-      .pro-faq-grid{
-        grid-template-columns:1fr;
-      }
-      .pro-store-shell{
-        margin-top:1.8rem;
-      }
-      .pro-grid-3,
-      .pro-grid-4,
-      .pro-products-grid,
-      .pro-reviews-grid{
-        grid-template-columns:1fr 1fr;
-      }
-      .site-header .wrap{
-        flex-direction:column;
-        align-items:flex-start;
-      }
-      .site-nav{
-        flex-wrap:wrap;
-        row-gap:.25rem;
-      }
-    }
-
-    @media (max-width:640px){
-      .pro-hero{
-        padding:2.3rem 0 2.4rem;
-      }
-      .pro-hero-title{
-        font-size:2.1rem;
-      }
-      .pro-grid-3,
-      .pro-grid-4,
-      .pro-products-grid,
-      .pro-reviews-grid{
-        grid-template-columns:1fr;
-      }
-      .pro-logos{
-        gap:.8rem;
-      }
-      .pro-pricing-inner{
-        padding:1.4rem 1.25rem 1.5rem;
-      }
-      .pro-faq-item{
-        padding:.85rem .9rem;
-      }
-      .site-nav{
-        overflow-x:auto;
-        white-space:nowrap;
-      }
-      .site-nav a,
-      .site-nav-cta{
-        flex:0 0 auto;
-      }
-    }
-
-    @media (max-width:480px){
-      .wrap{
-        padding-inline:1.1rem;
-      }
-      .pro-hero-actions{
-        flex-direction:column;
-      }
-      .pro-btn-primary,
-      .pro-btn-ghost{
-        width:100%;
-        justify-content:center;
-      }
-      .pro-contact-inner{
-        align-items:flex-start;
-      }
-    }
-  </style>
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="../css/styles.css">
 </head>
 
 <body>
-<div class="pro-page">
+<div class="page">
+
   <!-- HEADER -->
-  <header class="site-header">
-    <div class="wrap">
+  <header class="site-header" id="top">
+    <div class="wrap header-inner">
       <a href="#top" class="brand">
         <span class="logo-dot"></span>
-        <span class="brand-text">NeuroWeb<span> Pro Ecommerce</span></span>
+        <span class="brand-text">NeuroWeb <span>Business · Fitness Demo</span></span>
       </a>
+
+      <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+      </button>
 
       <nav class="site-nav" aria-label="Primary">
         <a href="#top" class="is-active">Home</a>
-        <a href="#catalog">Catalog</a>
-        <a href="#features">Features</a>
-        <a href="#workflow">Workflow</a>
-        <a href="#reviews">Reviews</a>
-        <a href="#pricing">Pro Plan</a>
-        <!-- demo sub-pages -->
-        <a href="product.html">Product</a>
-        <a href="cart.html">Cart</a>
-        <a href="checkout.html">Checkout</a>
-        <a href="thank-you.html">Thank you</a>
+        <a href="#programs">Programs</a>
+        <a href="#results">Results</a>
+        <a href="#blog">Blog</a>
+        <a href="#pricing">Business Plan</a>
         <a href="#contact" class="site-nav-cta">Talk to us</a>
       </nav>
     </div>
   </header>
 
-  <main class="pro-main">
+  <main>
+
     <!-- HERO -->
-    <section class="section pro-hero" id="top">
-      <div class="pro-hero-bg" aria-hidden="true"></div>
-      <div class="wrap">
-        <div class="pro-hero-grid">
-          <div class="reveal">
-            <div class="pro-pill">
-              <span></span>
-              Pro Plan · Ecommerce & online stores
-            </div>
-            <h1 class="pro-hero-title">
-              Launch a store that feels <span>fast, trustworthy,</span> and built to convert.
-            </h1>
-            <p class="pro-hero-lead">
-              Product grid, filters, search, tracking, and checkout flows – designed so your ads, organic,
-              and email all point to a store that actually performs.
-            </p>
+    <section class="section hero" aria-labelledby="hero-title">
+      <div class="wrap hero-grid">
+        <div class="hero-copy reveal" data-reveal-delay="0">
+          <div class="pill"><span></span>Business Plan · Fitness studio & coaching</div>
 
-            <div class="pro-hero-meta">
-              <div>
-                <strong>Ideal for</strong>
-                Growing ecommerce brands ready to invest properly.
-              </div>
-              <div>
-                <strong>Typical catalog size</strong>
-                20–300 products with room to scale.
-              </div>
-              <div>
-                <strong>Timeline</strong>
-                ±4–6 weeks depending on scope and integrations.
-              </div>
-            </div>
+          <h1 class="hero-title" id="hero-title">
+            Turn casual members into <span>committed clients</span> with a site that sells your coaching.
+          </h1>
 
-            <div class="pro-hero-actions">
-              <a href="#pricing" class="pro-btn-primary">
-                View Pro Plan pricing →
-              </a>
-              <a href="#catalog" class="pro-btn-ghost">
-                Scroll the demo homepage
-              </a>
-            </div>
-
-            <p class="pro-hero-note">
-              This is a single-page <strong>homepage demo</strong> for the Pro Plan. In a real project you also get
-              product templates, collection pages, cart/checkout flows (platform-dependent), and promos for campaigns.
-            </p>
-          </div>
-
-          <!-- Right: store preview -->
-          <div class="reveal" data-delay="1">
-            <div class="pro-store-shell" aria-label="Preview of an ecommerce homepage">
-              <div class="pro-store-header">
-                <div class="pro-store-logo">
-                  <span aria-hidden="true"></span>
-                  <strong>Nova Supply</strong>
-                </div>
-                <div class="pro-store-badges">
-                  <span class="pro-chip">Free shipping over R750</span>
-                  <span class="pro-chip">30-day returns</span>
-                </div>
-              </div>
-
-              <div class="pro-store-main">
-                <div class="pro-store-filters">
-                  <div class="pro-store-filters-left">
-                    <span style="font-size:.75rem;color:#9CA3AF;">New in · Featured</span>
-                    <span class="pro-filter-pill pro-filter-pill--active">All</span>
-                    <span class="pro-filter-pill">Everyday</span>
-                    <span class="pro-filter-pill">Desk</span>
-                    <span class="pro-filter-pill">Carry</span>
-                  </div>
-                  <div style="display:flex;align-items:center;gap:.35rem;">
-                    <span style="font-size:.74rem;color:#9CA3AF;">Sort</span>
-                    <span style="font-size:.74rem;color:#E5E7EB;">Bestsellers ▾</span>
-                  </div>
-                </div>
-
-                <div class="pro-store-grid">
-                  <article class="pro-product-card">
-                    <div class="pro-product-img">
-                      <span>Everyday Tech Tote</span>
-                    </div>
-                    <div class="pro-product-title">Everyday Tech Tote</div>
-                    <div class="pro-product-meta">
-                      <strong>R1,299</strong>
-                      <span>★ 4.8 · 126 reviews</span>
-                    </div>
-                  </article>
-
-                  <article class="pro-product-card">
-                    <div class="pro-product-img">
-                      <span>Slim Work Backpack</span>
-                    </div>
-                    <div class="pro-product-title">Slim Work Backpack</div>
-                    <div class="pro-product-meta">
-                      <strong>R1,599</strong>
-                      <span>★ 4.9 · 201 reviews</span>
-                    </div>
-                  </article>
-
-                  <article class="pro-product-card">
-                    <div class="pro-product-img">
-                      <span>Wireless Desk Set</span>
-                    </div>
-                    <div class="pro-product-title">Wireless Desk Set</div>
-                    <div class="pro-product-meta">
-                      <strong>R999</strong>
-                      <span>★ 4.7 · 89 reviews</span>
-                    </div>
-                  </article>
-
-                  <article class="pro-product-card">
-                    <div class="pro-product-img">
-                      <span>Minimal Card Holder</span>
-                    </div>
-                    <div class="pro-product-title">Minimal Card Holder</div>
-                    <div class="pro-product-meta">
-                      <strong>R349</strong>
-                      <span>★ 4.6 · 64 reviews</span>
-                    </div>
-                  </article>
-                </div>
-
-                <div class="pro-store-footer">
-                  <div>Built to feel like a proper store, not “just a website”.</div>
-                  <div><strong>Search · Filters · Quick add</strong></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div><!-- /grid -->
-      </div>
-    </section>
-
-    <!-- CATALOG TEASER / CATEGORY CARDS -->
-    <section class="section section--light" id="catalog">
-      <div class="wrap">
-        <header class="pro-section-head reveal">
-          <div class="pro-kicker">Catalog structure</div>
-          <h2 class="pro-section-title">
-            A homepage that showcases categories, not chaos.
-          </h2>
-          <p class="pro-section-lead">
-            For Pro we plan your collections, filters, and product hierarchy properly so shoppers land on something clear:
-            “I know what you sell, what’s popular, and where to go next”.
+          <p class="hero-lead">
+            Built for gyms, studios, and coaches that need more than a one-page site – clear programs,
+            real results, and lead forms that plug into your tracking.
           </p>
-        </header>
 
-        <div class="pro-products-row">
-          <!-- Product style grid -->
-          <div class="pro-products-grid reveal" data-delay="1">
-            <article class="pro-prod">
-              <div class="pro-prod-img"></div>
-              <div class="pro-prod-tag-row">
-                <span class="pro-prod-pill">New this week</span>
-                <span class="pro-prod-price">From R299</span>
-              </div>
-              <div style="font-weight:600;">Workspace essentials</div>
-              <div class="pro-prod-rating">Curated keyboards, desk mats, stands, and lights.</div>
-            </article>
-
-            <article class="pro-prod">
-              <div class="pro-prod-img"></div>
-              <div class="pro-prod-tag-row">
-                <span class="pro-prod-pill">Bestsellers</span>
-                <span class="pro-prod-price">From R499</span>
-              </div>
-              <div style="font-weight:600;">Carry & commute</div>
-              <div class="pro-prod-rating">Backpacks, totes, sling bags, laptop sleeves.</div>
-            </article>
-
-            <article class="pro-prod">
-              <div class="pro-prod-img"></div>
-              <div class="pro-prod-tag-row">
-                <span class="pro-prod-pill">Limited</span>
-                <span class="pro-prod-price">From R399</span>
-              </div>
-              <div style="font-weight:600;">Limited drops</div>
-              <div class="pro-prod-rating">Short-run colours and collabs to test demand.</div>
-            </article>
-          </div>
-
-          <!-- Copy / “what they get” -->
-          <div class="pro-products-copy reveal" data-delay="2">
-            <span class="pro-kicker">On a real project</span>
-            <h3 style="font-size:1.05rem;letter-spacing:-0.02em;margin:0 0 .4rem;">
-              Homepage, category, product, and promo templates – all matched to your brand.
-            </h3>
-            <p style="font-size:.9rem;color:#6B7280;margin:0 0 .7rem;">
-              This demo shows how we think about the <strong>homepage only</strong>. With Pro you also get:
-            </p>
-            <ul>
-              <li>Dedicated <strong>category templates</strong> with filters, sort, and tags.</li>
-              <li><strong>Product detail page</strong> layouts with gallery, variations, and trust blocks.</li>
-              <li>Landing variations for <strong>campaigns and seasonal drops</strong>.</li>
-              <li>Cart / mini-cart styling and platform-native checkout branded to your look.</li>
-            </ul>
-
-            <div class="pro-logos">
-              <span>Works with: Shopify, WooCommerce, and others.</span>
-              <span>Meta & Google Ads friendly structure.</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FEATURES – STACK / INTEGRATIONS -->
-    <section class="section section--muted" id="features">
-      <div class="wrap">
-        <header class="pro-section-head reveal">
-          <div class="pro-kicker">Stack & integrations</div>
-          <h2 class="pro-section-title">
-            Built for your products <span>and your marketing stack.</span>
-          </h2>
-          <p class="pro-section-lead">
-            The Pro Plan isn’t just “a pretty shopfront”. We connect your store to the tools that keep sales,
-            fulfilment, and retention moving.
-          </p>
-        </header>
-
-        <div class="pro-grid-3">
-          <article class="pro-card reveal" data-delay="1">
-            <div class="pro-pill-soft">Store platform</div>
-            <h3>Shopify, WooCommerce, or headless-friendly.</h3>
-            <p>
-              We design for your actual platform so the homepage, collections, and product pages are realistic,
-              quick, and maintainable.
-            </p>
-            <ul style="margin:.4rem 0 0;padding-left:1.1rem;font-size:.82rem;color:#6B7280;display:grid;gap:.2rem;">
-              <li>Collections and tags planned with marketing in mind.</li>
-              <li>SEO hygiene: titles, meta, schema, and URL structure.</li>
-              <li>Performance-conscious: image sizes and lazy loading.</li>
-            </ul>
-          </article>
-
-          <article class="pro-card reveal" data-delay="2">
-            <div class="pro-pill-soft">Tracking & data</div>
-            <h3>Events that tell you what’s actually happening.</h3>
-            <p>
-              We work with your marketing specialist to wire events that match their campaigns – not just generic pageviews.
-            </p>
-            <ul style="margin:.4rem 0 0;padding-left:1.1rem;font-size:.82rem;color:#6B7280;display:grid;gap:.2rem;">
-              <li>View item, add to cart, begin checkout, purchase (platform-dependent).</li>
-              <li>Promo click tracking for banners and hero spots.</li>
-              <li>Consent-friendly analytics for long-term data.</li>
-            </ul>
-          </article>
-
-          <article class="pro-card reveal" data-delay="3">
-            <div class="pro-pill-soft">Lifecycle & email</div>
-            <h3>Ready for flows, not just broadcasts.</h3>
-            <p>
-              We prepare key entry points for flows: welcome, browse abandon, cart abandon, post-purchase, and more.
-            </p>
-            <ul style="margin:.4rem 0 0;padding-left:1.1rem;font-size:.82rem;color:#6B7280;display:grid;gap:.2rem;">
-              <li>Newsletter and lead capture blocks that actually fit the design.</li>
-              <li>UTM structure that plays nicely with your ESP/CRM.</li>
-              <li>Room for future loyalty or referral programs.</li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- WORKFLOW / HOW IT RUNS -->
-    <section class="section section--light" id="workflow">
-      <div class="wrap">
-        <header class="pro-section-head reveal">
-          <div class="pro-kicker">Day-to-day workflow</div>
-          <h2 class="pro-section-title">
-            Your team can update products and content without calling a dev.
-          </h2>
-          <p class="pro-section-lead">
-            Pro keeps the tech under control: we do the heavy build, then hand over a store your team can run,
-            add products to, and campaign from.
-          </p>
-        </header>
-
-        <div class="pro-grid-3">
-          <article class="pro-card reveal" data-delay="1">
-            <h3>Products & collections</h3>
-            <p>
-              Add new variants, colours, or SKUs through your platform as usual. The layouts are built to flex: more
-              products, more reviews, more promo badges – without breaking.
-            </p>
-          </article>
-
-          <article class="pro-card reveal" data-delay="2">
-            <h3>Campaigns & promos</h3>
-            <p>
-              Hero and promo slots built into the homepage, category pages, and even product detail pages so you always
-              have somewhere to point ads and email traffic.
-            </p>
-          </article>
-
-          <article class="pro-card reveal" data-delay="3">
-            <h3>Support & iteration</h3>
-            <p>
-              We include a short training and can optionally stay on a care plan to iterate templates and test layouts
-              as your store grows.
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- REVIEWS -->
-    <section class="section section--dark" id="reviews">
-      <div class="wrap">
-        <header class="pro-section-head reveal">
-          <div class="pro-kicker">Client feedback</div>
-          <h2 class="pro-section-title">
-            Stores that feel “bigger than we are” – in a good way.
-          </h2>
-          <p class="pro-section-lead">
-            The quotes below are based on real feedback from ecommerce clients, anonymised and adapted for this demo.
-          </p>
-        </header>
-
-        <div class="pro-reviews-grid">
-          <article class="pro-review reveal" data-delay="1">
-            <div class="pro-review-stars">★★★★★</div>
-            <p>
-              “Our Meta and Google campaigns started making sense once the new store went live. Same budget, better product
-              pages and tracking – suddenly we could see which ranges were actually carrying us.”
-            </p>
-            <footer>
-              <strong>DTC lifestyle brand</strong><br>
-              Pro Plan ecommerce build · ongoing optimisation
-            </footer>
-          </article>
-
-          <article class="pro-review reveal" data-delay="2">
-            <div class="pro-review-stars">★★★★★</div>
-            <p>
-              “The homepage looks like a real brand now. People actually browse, not just click in and bounce.
-              The way collections and limited drops are structured has made weekly launches much easier.”
-            </p>
-            <footer>
-              <strong>Accessories store</strong><br>
-              Pro Plan build · ~5 week project
-            </footer>
-          </article>
-
-          <article class="pro-review reveal" data-delay="3">
-            <div class="pro-review-stars">★★★★★</div>
-            <p>
-              “Our team can add products and change copy without breaking anything – which was our big fear.
-              The structure gives us confidence to run more experiments.”
-            </p>
-            <footer>
-              <strong>Multi-brand retailer</strong><br>
-              Pro Plan build · internal team handover
-            </footer>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- PRO PLAN PRICING -->
-    <section class="section pro-pricing" id="pricing">
-      <div class="wrap">
-        <div class="pro-pricing-inner reveal">
-          <div class="pro-pricing-top">
+          <div class="hero-meta">
             <div>
-              <div style="font-size:.8rem;text-transform:uppercase;letter-spacing:.12em;color:#CBD5F5;margin-bottom:.25rem;">
-                Pro Plan · Ecommerce / stores
-              </div>
-              <div class="pro-price-main">
-                From R25,000–45,000 <small>(depending on platform, catalog, and integrations)</small>
-              </div>
+              <strong>Ideal for</strong>
+              Gyms, PT studios, online & hybrid coaching.
             </div>
-
-            <div class="pro-pricing-cta">
-              <a href="#contact" class="pro-btn-primary">Talk about your store</a>
-              <span>We’ll ask a few questions about your products, current platform, and marketing, then suggest a realistic scope.</span>
+            <div>
+              <strong>Typical site size</strong>
+              5–10 pages plus an optional blog.
+            </div>
+            <div>
+              <strong>Timeline</strong>
+              ±3–5 weeks depending on content and integrations.
             </div>
           </div>
 
-          <ul>
-            <li>Homepage, collections, and product templates designed around your offer and AOV.</li>
-            <li>Platform-aware build (Shopify, WooCommerce, or similar) with clear catalog structure.</li>
-            <li>Tracking events agreed with your marketing team (view, add-to-cart, checkout steps where supported).</li>
-            <li>Promo zones: hero, category top, product page highlights, and announcement bars.</li>
-            <li>On-page SEO foundations and performance-conscious layout decisions.</li>
-            <li>Training handover and optional ongoing support / care plan if you want us on call.</li>
+          <div class="hero-actions">
+            <a href="#pricing" class="btn-primary">View Business Plan →</a>
+            <a href="#programs" class="btn-ghost">Scroll the demo</a>
+          </div>
+
+          <p class="hero-note">
+            This is a <strong>Business Plan homepage demo</strong> for a fictional brand,
+            <strong>Atlas Performance Club</strong>. Real projects include inner program pages, a results page,
+            blog, and a tracking-ready thank-you page.
+          </p>
+        </div>
+
+        <div class="hero-preview reveal" data-reveal-delay="80">
+          <div class="app-shell" aria-label="Preview of a coaching dashboard">
+            <div class="app-header">
+              <div class="app-logo">
+                <span aria-hidden="true"></span>
+                <strong>Atlas Performance Club</strong>
+              </div>
+              <div class="app-badges">
+                <span class="chip">120+ active members</span>
+                <span class="chip">Hybrid coaching</span>
+              </div>
+            </div>
+
+            <div class="app-main">
+              <article class="app-card is-active reveal"
+                       role="button"
+                       tabindex="0"
+                       data-card-summary="Lower body strength block with warm-up, main lifts, accessories, and a short finisher.">
+                <div class="card-img"></div>
+                <strong>Tonight’s training</strong>
+                <p>Lower body strength · 60 min · 4 blocks</p>
+              </article>
+
+              <article class="app-card reveal"
+                       role="button"
+                       tabindex="0"
+                       data-card-summary="Weekly target so members know exactly what ‘a good week’ looks like.">
+                <div class="card-img"></div>
+                <strong>Weekly target</strong>
+                <p>3 gym sessions · 2 runs · 1 optional stretch day</p>
+              </article>
+
+              <article class="app-card reveal"
+                       role="button"
+                       tabindex="0"
+                       data-card-summary="Simple check-in form for energy, sleep, stress and adherence – perfect for Loom feedback.">
+                <div class="card-img"></div>
+                <strong>Check-in form</strong>
+                <p>Energy · Sleep · Stress · Notes</p>
+              </article>
+
+              <article class="app-card reveal"
+                       role="button"
+                       tabindex="0"
+                       data-card-summary="Trends over time for bodyweight and performance – visible progress keeps people paying.">
+                <div class="card-img"></div>
+                <strong>Member stats</strong>
+                <p>Bodyweight & key lifts over 12 weeks</p>
+              </article>
+            </div>
+
+            <p class="app-summary" id="card-summary">
+              Lower body strength block with warm-up, main lifts, accessories, and a short finisher.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- METRICS STRIP -->
+    <section class="section stats" aria-label="Key outcomes">
+      <div class="wrap">
+        <div class="stats-bar reveal" data-reveal-delay="40">
+          <div class="stats-item">
+            <div class="stats-number">120+</div>
+            <div class="stats-label">active members on similar builds</div>
+          </div>
+          <div class="stats-item">
+            <div class="stats-number">4–6 weeks</div>
+            <div class="stats-label">typical build & launch timeline</div>
+          </div>
+          <div class="stats-item">
+            <div class="stats-number">3–5 leads/week</div>
+            <div class="stats-label">from an active fitness site + ads</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROGRAMS -->
+    <section class="section" id="programs" aria-labelledby="programs-title">
+      <div class="wrap">
+        <header class="section-head reveal" data-reveal-delay="0">
+          <div class="kicker">Programs & offers</div>
+          <h2 class="section-title" id="programs-title">
+            Show members exactly what you offer – and who it’s for.
+          </h2>
+          <p class="section-lead">
+            Business is for studios that have multiple programs and services. We structure your pages
+            so a new visitor can see, in one scroll, how to train with you.
+          </p>
+        </header>
+
+        <div class="programs-row">
+          <div class="programs-grid">
+            <article class="program-card reveal" data-reveal-delay="0">
+              <div class="program-img program-img--strength"></div>
+              <div class="program-meta">
+                <span class="tag">Flagship</span>
+                <span class="price">From R999 /month</span>
+              </div>
+              <div class="program-title">Strength & Hypertrophy Club</div>
+              <p class="program-desc">
+                3x per week gym sessions, progressive blocks, and in-app tracking so members see the gains.
+              </p>
+            </article>
+
+            <article class="program-card reveal" data-reveal-delay="60">
+              <div class="program-img program-img--fatloss"></div>
+              <div class="program-meta">
+                <span class="tag">Popular</span>
+                <span class="price">From R899 /month</span>
+              </div>
+              <div class="program-title">Fat Loss Coaching</div>
+              <p class="program-desc">
+                Training + nutrition check-ins, weekly photos, and habits – built for busy clients, not athletes.
+              </p>
+            </article>
+
+            <article class="program-card reveal" data-reveal-delay="120">
+              <div class="program-img program-img--football"></div>
+              <div class="program-meta">
+                <span class="tag">In-season</span>
+                <span class="price">From R1,299 /month</span>
+              </div>
+              <div class="program-title">Football Conditioning</div>
+              <p class="program-desc">
+                Speed, conditioning, and strength blocks tailored around match days and recovery.
+              </p>
+            </article>
+          </div>
+
+          <div class="program-copy reveal" data-reveal-delay="120">
+            <div class="kicker">On a real project</div>
+            <h3 class="program-copy-title">
+              Each key program gets its own page with outcomes, schedule, and a clear call to action.
+            </h3>
+            <p class="program-copy-lead">
+              This demo only shows the homepage. With the Business Plan you also get:
+            </p>
+
+            <ul class="list">
+              <li>Dedicated <strong>program pages</strong> (e.g. Strength Club, Fat Loss, Online Coaching).</li>
+              <li>A <strong>results page</strong> with testimonials, before/after stories, and trust markers.</li>
+              <li>A simple <strong>blog</strong> for training, nutrition, and mindset content.</li>
+              <li>A <strong>contact + thank-you page</strong> wired for lead tracking and follow-up.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESULTS / FEATURES -->
+    <section class="section section-muted" id="results" aria-labelledby="results-title">
+      <div class="wrap">
+        <header class="section-head reveal">
+          <div class="kicker">Why Business</div>
+          <h2 class="section-title" id="results-title">
+            Built around your programs, tracking, and content – not just a logo.
+          </h2>
+          <p class="section-lead">
+            We design the site around the real work you do: programs, progress tracking, and check-ins,
+            plus the analytics your marketing needs.
+          </p>
+        </header>
+
+        <div class="grid-3">
+          <article class="feat-card reveal" data-reveal-delay="0">
+            <div class="pill-soft">Site structure</div>
+            <h3>Pages mapped to your offers.</h3>
+            <p>
+              Navigation that mirrors how people actually join: discovery, programs, results, FAQ, and contact –
+              with room to grow later.
+            </p>
+          </article>
+
+          <article class="feat-card reveal" data-reveal-delay="80">
+            <div class="pill-soft">Tracking & data</div>
+            <h3>Lead forms that talk to your ads.</h3>
+            <p>
+              Events for form views, submissions, thank-you page hits, and WhatsApp / call clicks – set up with your
+              campaigns in mind.
+            </p>
+          </article>
+
+          <article class="feat-card reveal" data-reveal-delay="140">
+            <div class="pill-soft">Content & results</div>
+            <h3>Space for the stories that sell coaching.</h3>
+            <p>
+              Page layouts for transformations, testimonials, and quick FAQs around pricing, contracts, and what to expect.
+            </p>
+          </article>
+        </div>
+
+        <!-- TESTIMONIAL STRIP -->
+        <div class="testimonials-strip reveal" data-reveal-delay="120" aria-label="Client testimonials">
+          <article class="testimonial-card">
+            <p class="testimonial-quote">
+              “Our new site feels like an extension of the gym floor – clear offers, real results, and leads our coaches
+              actually want to talk to.”
+            </p>
+            <p class="testimonial-meta">
+              <strong>Jamie K.</strong> · Owner, Hybrid Strength Studio
+            </p>
+          </article>
+
+          <article class="testimonial-card">
+            <p class="testimonial-quote">
+              “Launch was smooth, tracking just worked, and we finally have somewhere to send people that isn’t our Instagram bio.”
+            </p>
+            <p class="testimonial-meta">
+              <strong>Razia M.</strong> · Online strength & conditioning coach
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOG -->
+    <section class="section" id="blog" aria-labelledby="blog-title">
+      <div class="wrap">
+        <header class="section-head reveal">
+          <div class="kicker">Content & education</div>
+          <h2 class="section-title" id="blog-title">
+            Simple blog layout for training, nutrition, and mindset posts.
+          </h2>
+          <p class="section-lead">
+            Use articles to educate members, answer common questions in public, and warm up new leads from search and social.
+          </p>
+        </header>
+
+        <div class="grid-3">
+          <article class="feat-card reveal" data-reveal-delay="0">
+            <div class="pill-soft">Training</div>
+            <h3>How to structure a 12-week strength block</h3>
+            <p>
+              A typical article layout: headline, intro, content blocks, and CTAs back to your strength program.
+            </p>
+          </article>
+
+          <article class="feat-card reveal" data-reveal-delay="80">
+            <div class="pill-soft">Nutrition</div>
+            <h3>5 mistakes people make when cutting</h3>
+            <p>
+              Turn DM questions into posts you can send to prospects before they join.
+            </p>
+          </article>
+
+          <article class="feat-card reveal" data-reveal-delay="140">
+            <div class="pill-soft">Mindset</div>
+            <h3>Training through busy weeks without losing progress</h3>
+            <p>
+              Quick posts that show you understand your members’ lives, not just sets and reps.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="section pricing" id="pricing" aria-labelledby="pricing-title">
+      <div class="wrap">
+        <div class="pricing-box reveal">
+          <div class="pricing-top">
+            <div>
+              <div class="pricing-label">Business Plan · SMEs / lead-gen sites</div>
+              <div class="pricing-main" id="pricing-title">
+                From R10,000–15,000
+                <small>(depending on scope, pages, and integrations)</small>
+              </div>
+            </div>
+
+            <a href="#contact" class="btn-primary">Talk about your project</a>
+          </div>
+
+          <ul class="pricing-list">
+            <li>Up to <strong>10 pages</strong> plus an optional blog for articles and updates.</li>
+            <li><strong>Advanced layouts</strong> tailored to your brand – not just a bought theme.</li>
+            <li><strong>Lead forms + dedicated thank-you page</strong> wired for tracking conversions.</li>
+            <li><strong>Analytics + events</strong> (GA4 / Pixel) aligned with your campaigns.</li>
+            <li><strong>On-page SEO foundations</strong> (schema, sitemap, URL structure, meta basics).</li>
+            <li><strong>2 rounds of revisions</strong> once you’ve seen everything live.</li>
+            <li><strong>Basic training & handover</strong> so you or your team can manage content confidently.</li>
           </ul>
         </div>
       </div>
     </section>
 
     <!-- FAQ -->
-    <section class="section section--light" id="faq">
+    <section class="section section-muted" id="faq" aria-labelledby="faq-title">
       <div class="wrap">
-        <div class="pro-faq-grid">
+        <div class="faq-grid">
           <div class="reveal">
-            <div class="pro-kicker">Questions</div>
-            <h2 class="pro-section-title">
-              Common questions about the Pro ecommerce build.
+            <div class="kicker">Questions</div>
+            <h2 class="section-title" id="faq-title">
+              Common questions about the Business fitness build.
             </h2>
-            <p class="pro-section-lead">
-              If you’re not sure whether you’re “big enough” for Pro yet, we’d rather give you an honest answer
+            <p class="section-lead">
+              If you’re not sure whether you’re “big enough” for Business yet, we’d rather give you an honest answer
               than oversell it.
             </p>
           </div>
 
-          <div class="pro-faq-list">
-            <article class="pro-faq-item reveal" data-delay="1">
-              <h3>Do you only work with certain platforms?</h3>
+          <div class="faq-list">
+            <article class="faq-item reveal" data-reveal-delay="0">
+              <h3>Do I need an app, or is a website enough?</h3>
               <p>
-                For ecommerce we mainly work with Shopify and WooCommerce, but we’re open to chatting if you’re on
-                something else. The important part is that your platform can support clean collections, product data,
-                and tracking.
+                Many studios use a separate coaching app. The Business Plan focuses on the marketing and lead-gen site
+                that explains your programs and feeds that app.
               </p>
             </article>
 
-            <article class="pro-faq-item reveal" data-delay="2">
-              <h3>Can you migrate us from our current store?</h3>
+            <article class="faq-item reveal" data-reveal-delay="60">
+              <h3>What content do we need before starting?</h3>
               <p>
-                Yes, for Pro-level projects we can scope a migration plan (products, customers, and URLs where possible)
-                so you don’t lose history. We’ll flag where things might change for SEO or tracking.
+                Program descriptions, rough pricing, coach bios, a few testimonials, and any good photos or brand assets.
+                We’ll guide you through gaps.
               </p>
             </article>
 
-            <article class="pro-faq-item reveal" data-delay="3">
-              <h3>What do we need ready before we start?</h3>
+            <article class="faq-item reveal" data-reveal-delay="120">
+              <h3>Can this work if we’re mostly online coaching?</h3>
               <p>
-                A product list (even if it’s in a spreadsheet), your current platform details, brand basics
-                (logo, colours), and a rough idea of your main collections and hero ranges.
+                Yes. The layout is flexible enough for fully online coaching brands – we simply adapt sections to highlight
+                check-ins, app features, and remote processes.
               </p>
             </article>
 
-            <article class="pro-faq-item reveal" data-delay="4">
-              <h3>Do you manage ads or just build the store?</h3>
+            <article class="faq-item reveal" data-reveal-delay="180">
+              <h3>Do you manage ads, or just build the site?</h3>
               <p>
-                We focus on the store and the tracking that supports ads. We’re happy to work with your existing
-                marketing team or specialist so everything lines up for them.
+                We focus on the site and the tracking that supports ads. We’re happy to work alongside your existing
+                marketing specialist from day one.
               </p>
             </article>
           </div>
@@ -1491,88 +428,108 @@
       </div>
     </section>
 
-    <!-- CONTACT CTA -->
-    <section class="section pro-contact" id="contact">
+    <!-- CONTACT -->
+    <section class="section contact" id="contact" aria-labelledby="contact-title">
       <div class="wrap">
-        <div class="pro-contact-inner reveal">
+        <div class="contact-box reveal">
           <div>
-            <div class="pro-kicker">Next step</div>
-            <h2 class="pro-section-title">
-              Want your store to look and perform like this?
-            </h2>
+            <div class="kicker">Next step</div>
+            <h2 class="section-title" id="contact-title">Want your fitness site to look and perform like this?</h2>
             <p>
-              Use the main contact form on the NeuroWeb site and mention the
-              <strong>“Pro – Nova Supply ecommerce demo”</strong>. We’ll reply with a short loom or voice note
-              with thoughts tailored to your brand and product range.
+              Use your main contact form and mention the
+              <strong>“Business – Atlas Performance Club demo”</strong>. We’ll reply with a short Loom or voice note
+              with thoughts tailored to your brand, location, and programs.
             </p>
           </div>
 
-          <a href="#top" class="pro-btn-ghost">
-            Back to top of demo
-          </a>
+          <a href="#top" class="btn-ghost">Back to top</a>
         </div>
       </div>
     </section>
+
   </main>
 
   <!-- FOOTER -->
-  <footer class="pro-footer">
-    <div class="wrap pro-footer-inner">
-      <div>© <span id="year"></span> NeuroWeb Digital. Pro Plan ecommerce homepage demo.</div>
-      <div style="display:flex;gap:.75rem;flex-wrap:wrap;">
-        <a href="../starter/index.html">Starter (SMEs)</a>
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <div>© <span id="year"></span> NeuroWeb Digital. Business Plan fitness homepage demo.</div>
+      <nav class="footer-nav" aria-label="Demo navigation">
+        <a href="../starter/index.html">Starter (café)</a>
         <span aria-hidden="true">·</span>
-        <a href="../business/index.html">Business (fitness)</a>
+        <span>Business (fitness)</span>
         <span aria-hidden="true">·</span>
-        <span>Pro (ecommerce) – this page</span>
-      </div>
+        <a href="../pro/index.html">Pro (ecommerce)</a>
+      </nav>
     </div>
   </footer>
+
 </div>
 
 <script>
-  // Year
+  // Footer year
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Scroll spy for nav (only hash links)
-  const navLinks = Array.from(document.querySelectorAll('.site-nav a:not(.site-nav-cta)'));
-  const sectionIds = navLinks
-    .map(l => l.getAttribute('href'))
-    .filter(h => h && h.startsWith('#'));
-  const sections = sectionIds.map(id => document.querySelector(id)).filter(Boolean);
+  // Hero app card interaction (click + keyboard)
+  const summaryEl = document.getElementById('card-summary');
+  const appCards = document.querySelectorAll('.app-card');
 
-  function handleScrollSpy(){
-    const offset = window.scrollY + 120;
-    let current = '#top';
-    sections.forEach(sec => {
-      if(sec.offsetTop <= offset){
-        current = '#' + sec.id;
-      }
-    });
-    navLinks.forEach(link => {
-      const href = link.getAttribute('href');
-      if(href && href === current){
-        link.classList.add('is-active');
-      }else if(href && href.startsWith('#')){
-        link.classList.remove('is-active');
-      }
-    });
+  function setActiveCard(card) {
+    appCards.forEach(c => c.classList.remove('is-active'));
+    card.classList.add('is-active');
+    const text = card.getAttribute('data-card-summary');
+    if (text && summaryEl) {
+      summaryEl.textContent = text;
+    }
   }
-  window.addEventListener('scroll', handleScrollSpy);
-  handleScrollSpy();
 
-  // Simple reveal on scroll
+  appCards.forEach(card => {
+    card.addEventListener('click', () => setActiveCard(card));
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        setActiveCard(card);
+      }
+    });
+  });
+
+  // Scroll reveal with optional delay
+  const reveals = document.querySelectorAll('.reveal');
+
   const revealObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-      if(entry.isIntersecting){
-        entry.target.classList.add('reveal-visible');
+      if (entry.isIntersecting) {
+        const delay = entry.target.dataset.revealDelay || 0;
+        entry.target.style.setProperty('--reveal-delay', `${delay}ms`);
+        entry.target.classList.add('is-visible');
         revealObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.14 });
+  }, { threshold: 0.16 });
 
-  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  reveals.forEach(el => revealObserver.observe(el));
+
+  // Mobile nav toggle
+  const navToggle = document.querySelector('.nav-toggle');
+  const siteNav = document.querySelector('.site-nav');
+
+  if (navToggle && siteNav) {
+    navToggle.addEventListener('click', () => {
+      const isOpen = siteNav.classList.toggle('is-open');
+      navToggle.classList.toggle('is-active', isOpen);
+      navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    // Close on link click (mobile)
+    siteNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (siteNav.classList.contains('is-open')) {
+          siteNav.classList.remove('is-open');
+          navToggle.classList.remove('is-active');
+          navToggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+  }
 </script>
-<script src="../shared/js/ui.js" defer></script>
 </body>
 </html>
