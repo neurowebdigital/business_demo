@@ -80,6 +80,7 @@ a {
   justify-content: space-between;
   align-items: center;
   gap: 1.25rem;
+  position: relative; /* ensures mobile nav is anchored to header content */
 }
 
 .brand {
@@ -142,7 +143,7 @@ a {
   border: none;
 }
 
-/* Mobile nav toggle */
+/* Mobile nav toggle button */
 .nav-toggle {
   display: none;
   position: relative;
@@ -164,9 +165,10 @@ a {
   position: absolute;
 }
 
-/* Default: bars visible */
+/* Default: hamburger visible */
 .nav-toggle .fa-bars {
   opacity: 1;
+  transform: scale(1);
 }
 
 .nav-toggle .fa-xmark {
@@ -184,7 +186,6 @@ a {
   opacity: 1;
   transform: scale(1);
 }
-
 
 /* -----------------------------------------------------
    BUTTONS
