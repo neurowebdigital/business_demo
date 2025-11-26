@@ -155,29 +155,36 @@ a {
   cursor: pointer;
   align-items: center;
   justify-content: center;
-  gap: 0.3rem;
 }
 
-.nav-toggle span {
-  width: 1.2rem;
-  height: 2px;
-  border-radius: 999px;
-  background: #0f172a;
-  display: block;
-  transition: transform 0.18s ease, opacity 0.18s ease, background 0.18s ease;
+.nav-toggle i {
+  font-size: 1.2rem;
+  color: #0f172a;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  position: absolute;
 }
 
-.nav-toggle.is-active span:first-child {
-  transform: translateY(3px) rotate(45deg);
+/* Default: bars visible */
+.nav-toggle .fa-bars {
+  opacity: 1;
 }
 
-.nav-toggle.is-active span:last-child {
-  transform: translateY(-3px) rotate(-45deg);
+.nav-toggle .fa-xmark {
+  opacity: 0;
+  transform: scale(0.8);
 }
 
-.site-nav-cta:hover {
-  transform: translateY(-2px);
+/* Toggle state */
+.nav-toggle.is-active .fa-bars {
+  opacity: 0;
+  transform: scale(0.8);
 }
+
+.nav-toggle.is-active .fa-xmark {
+  opacity: 1;
+  transform: scale(1);
+}
+
 
 /* -----------------------------------------------------
    BUTTONS
